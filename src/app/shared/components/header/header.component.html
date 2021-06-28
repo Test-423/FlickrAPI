@@ -1,0 +1,22 @@
+<div class="header">
+    <div class="logo">
+        <span class="logo-text">Image Finder</span>
+    </div>
+    <nav class="nav">
+        <tui-tabs [(activeItemIndex)]="activeItemIndex" class="header-router" under>
+            <button tuiTab *ngFor="let item of routingUrls; let last = last" tuiRipple="var(--tui-text-01)"
+                [routerLink]="item.url" [disabled]="last">
+                <tui-svg class="tui-space_right-2" [src]="item.icon"></tui-svg>
+                {{item.name}}
+            </button>
+        </tui-tabs>
+
+        <!-- <div class="nav-btn" *ngFor="let item of routingUrls, let i = index" [routerLink]="item.url"
+            [ngClass]="{'nav-btn-active':'/'+item.url===router.url}">
+            <tui-svg class="nav-icon" [ngClass]="{'active-item':'/'+item.url===router.url}" [src]="item.icon"></tui-svg>
+            <span [ngClass]="{'active-item':'/'+item.url===router.url}">
+                {{item.name}}
+            </span>
+        </div> -->
+    </nav>
+</div>

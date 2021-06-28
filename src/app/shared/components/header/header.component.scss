@@ -1,0 +1,76 @@
+:host {
+    --tui-primary-text: #fff;
+    --tui-primary: #299d37;
+    --tui-primary-hover: #2c7a35;
+    --tui-primary-active: #2c7a35;
+    .header {
+        width: 100%;
+        height: 5.2rem;
+        padding: 0 3.2rem 0 0;
+        box-shadow: 0px 4px 5px hsla(0, 0%, 0%, 0.14), 0px 1px 10px hsla(0, 0%, 0%, 0.12),
+            0px 2px 4px hsla(0, 0%, 0%, 0.2);
+        display: flex;
+        align-items: center;
+        z-index: 1000;
+        position: relative;
+        background-color: var(--tui-base-02);
+
+        font-size: var(--font-size-l);
+        color: var(--tui-text-01);
+    }
+    .logo {
+        width: 20rem;
+        padding-left: 2.8rem;
+        display: flex;
+        align-items: center;
+    }
+    .logo-text {
+        width: 9rem;
+        margin-left: 1rem;
+        font-size: var(--font-size-m);
+        text-decoration: underline;
+        text-decoration-color: var(--tui-primary);
+    }
+    .logo-icon {
+        margin: 0rem;
+    }
+    .nav {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+        margin-left: 20px;
+    }
+    .nav-btn {
+        width: 12rem;
+        height: 100%;
+        letter-spacing: 0.1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        font-size: var(--font-size);
+        color: var(--tui-base-05);
+    }
+    .nav-btn-active {
+        color: var(--white);
+        &::after {
+            width: 12rem;
+            height: 0.2rem;
+            top: 5rem;
+            position: absolute;
+            content: "";
+            background-color: var(--tui-base-01);
+        }
+    }
+    .nav-icon {
+        margin-bottom: 0.6rem;
+    }
+    .toggler {
+        margin-left: auto;
+        font-size: var(--font-size-m);
+    }
+}

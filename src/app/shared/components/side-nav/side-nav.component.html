@@ -1,0 +1,57 @@
+<nav class="side-nav">
+    <tui-accordion-item [(open)]="showFilter" class="accordion">
+        Filter
+        <ng-template tuiAccordionItemContent class="ras">
+            <div class="accordion-container">
+                <form [formGroup]="form" orientation="vertical" class="filter-form">
+                    <tui-filter formControlName="filters" [content]="filter" [items]="filterMass" class="filter">
+                    </tui-filter>
+                </form>
+                <div>
+                    <ng-template #filter let-item>
+                        <div class="filter-container">
+                            <tui-svg class="tui-space_right-4" [src]="item.icon"></tui-svg>
+                            {{item.name}}
+                        </div>
+                    </ng-template>
+                </div>
+                <button tuiButton type="button" class="tui-space_right-3 tui-space_bottom-3" iconRight="tuiIconPlus"
+                    size='s' class="filter-btn" (click)="showDialog(addFilter)">
+                    Add filter
+                </button>
+                <ng-template #addFilter="polymorpheus" polymorpheus let-observer>
+                    <p>Add your own filter</p>
+                    <form [formGroup]="arg">
+                        <tui-input [tuiTextfieldLabelOutside]="false" formControlName="name" [tuiTextfieldCleaner]=true>
+                            Filter Name
+                        </tui-input>
+                        <tui-input-tag class="b-form tui-space_top-4" [tuiTextfieldLabelOutside]="true"
+                            formControlName="tags">
+                            Enter tags
+                        </tui-input-tag>
+                    </form>
+                    <button tuiButton type="button" size="m" (click)="observer.complete()" class="tui-space_top-5">
+                        Cancel
+                    </button>
+                    <button tuiButton type="button" size="m" (click)="observer.next(); observer.complete()"
+                        [disabled]=showAddFilter class="tui-space_top-5 tui-space_left-2">
+                        Ok
+                    </button>
+                </ng-template>
+            </div>
+        </ng-template>
+    </tui-accordion-item>
+    <tui-accordion-item [(open)]="showSorting">
+        Sort
+        <ng-template tuiAccordionItemContent>
+            <form [formGroup]="form" orientation="vertical">
+                <div tuiGroup class="group sort" [collapsed]="true" orientation="vertical">
+                    <tui-radio-block contentAlign="left" formControlName="sorting" size="m"
+                        *ngFor="let item of sortMass" item={{item.data}} class="rounded">
+                        {{item.name}}
+                    </tui-radio-block>
+                </div>
+            </form>
+        </ng-template>
+    </tui-accordion-item>
+</nav>

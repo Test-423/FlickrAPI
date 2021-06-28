@@ -1,0 +1,111 @@
+:host {
+    .container {
+        width: 100%;
+        z-index: 1;
+        padding: 2.3rem 1.5rem 0px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        @media screen and (max-width: 1500px) {
+            padding: 0.8rem;
+        }
+    }
+    .card {
+        display: inline-block;
+        height: auto;
+        border-radius: 10px;
+        border: 1px solid var(--tui-base-06);
+        margin-bottom: 3rem;
+        margin-bottom: 3rem;
+        width: 352px;
+        overflow: hidden;
+        &-fav {
+            border: 1px solid var(--primary);
+            background-color: var(--accent);
+        }
+        &-header {
+            min-height: 5.2rem;
+            height: auto;
+            width: 100%;
+            padding: 1.1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        &-text {
+            margin-left: 1.1rem;
+            width: 12.3rem;
+            display: flex;
+            flex-direction: column;
+        }
+        &-title {
+            min-height: 1.1rem;
+            max-height: 1.3rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: var(--font-size-m);
+        }
+        &-subtitle {
+            min-height: 1.3rem;
+            max-height: 2rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.1rem;
+            margin-top: 0.6rem;
+        }
+        &-btns {
+            height: 2.8rem;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        &-share-btn {
+            margin-left: auto;
+            cursor: pointer;
+        }
+        &-fav-btn {
+            margin-left: 1rem;
+            cursor: pointer;
+        }
+        &-lineclamp {
+            height: auto;
+        }
+        &-tags {
+            height: auto;
+            max-height: 5.6rem;
+            padding: 0.9rem 0.6rem 0.9rem 1.1rem;
+            width: 100%;
+            display: flex;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            box-sizing: border-box;
+            border-radius: 0 0 10px 10px;
+        }
+        &-owner {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &-icon {
+                width: 3rem;
+                height: 3rem;
+                border-radius: 0.4rem;
+            }
+        }
+        &-img {
+            width: 100%;
+            //height: auto;
+        }
+    }
+    .ass {
+        background-color: rebeccapurple;
+        height: auto;
+        display: flex;
+    }
+    .elems-container {
+        height: 100%;
+        overflow-y: scroll;
+    }
+}
