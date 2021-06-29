@@ -56,7 +56,6 @@ export class FavPageComponent implements OnInit {
 
     ngOnInit() {
         this.imagesMass = JSON.parse(localStorage.getItem('fav-images') || '0');
-        console.log(this.imagesMass);
         this.dataChunk = this.imagesMass.slice(0, this.pageSize);
         this.length = this.imagesMass.length;
     }

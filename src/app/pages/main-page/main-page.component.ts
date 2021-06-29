@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, ChangeDetectorRef, OnInit, Output, SimpleChanges, Inject, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, ChangeDetectorRef, OnInit, Output, SimpleChanges, Inject, ViewChild, HostListener } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { FavImagesService } from "src/services/fav-images.service";
@@ -13,6 +13,7 @@ import { TUI_ARROW } from '@taiga-ui/kit';
 import { debounceTime, delay, distinctUntilChanged, startWith, switchMap } from 'rxjs/operators';
 import { TuiNotificationsService } from '@taiga-ui/core';
 import { MainPageService } from 'src/app/api/main-page/main-page.api.service';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 
 
@@ -44,11 +45,11 @@ export class MainPageComponent implements OnInit {
     @Output() onSearch = new EventEmitter<string>();
     @Output() onScrollSearch = new EventEmitter<string>();
 
-
     private filterSubs: Subscription;
     private sortingSubs: Subscription;
     private formSubs: Subscription;
     private imagesSubs: Subscription;
+    private querySubs: Subscription;
 
     private tags$ = new Subject<string>();
 
@@ -72,8 +73,10 @@ export class MainPageComponent implements OnInit {
         private favService: FavImagesService,
         private searchService: MainPageService,
         private changeDetector: ChangeDetectorRef,
-        private filterService: FilterService
-    ) { }
+        private filterService: FilterService,
+        public breakpointObserver: BreakpointObserver
+    ) {
+    }
 
     ngOnInit() {
         this.isActive = !this.isActive;
@@ -81,6 +84,7 @@ export class MainPageComponent implements OnInit {
         this.filterSubs = this.filterService.filter$.subscribe((val) => {
             this.testForm.patchValue({ tagsInput: val })
         });
+
         this.sortingSubs = this.filterService.sorting$.subscribe((val) => {
             this.testForm.patchValue({ sorting: val })
         });
@@ -100,8 +104,16 @@ export class MainPageComponent implements OnInit {
             this.onSearch.emit(val);
             this.filterService.sendTags(val.tagsInput);
         });
+        this.breakpointObserver.observe(['(max-width: 400px)']).subscribe((state: BreakpointState) => {
+            if (state.matches) {
+                console.log(true)
+            } else {
+                console.log(false)
+            }
+        });
+        this.testForm.patchValue({ searchInput: 'car' });
 
-        this.testForm.patchValue({ searchInput: 'car' })
+
     }
 
     ngOnDestroy(): void {

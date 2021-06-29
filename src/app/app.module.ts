@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxMasonryModule } from 'ngx-masonry';
 
 import { FavPageComponent } from './pages/fav-page/fav-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
@@ -15,6 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MainPageContainer } from './pages/main-page/main-page.container';
 import { TaigaModule } from './taiga.module';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll'
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
     declarations: [
@@ -33,7 +33,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll'
         HttpClientModule,
         TaigaModule,
         InfiniteScrollModule,
-        NgxMasonryModule
+        LayoutModule
     ],
     exports: [
         MainPageContainer
