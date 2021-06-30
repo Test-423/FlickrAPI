@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     private userInactive: Subject<any> = new Subject();
     private userActivity: ReturnType<typeof setTimeout>;
     private dialogOpened: boolean = false;
-    private dialogTimeout: number = 10000;
+    private dialogTimeout: number = 60000;
 
 
     @HostListener("window:visibilitychange", ["$event"]) onVisibilityChange($event) {
