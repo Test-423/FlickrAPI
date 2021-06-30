@@ -864,7 +864,7 @@ class AppComponent {
         this.dialogService = dialogService;
         this.userInactive = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
         this.dialogOpened = false;
-        this.dialogTimeout = 10000;
+        this.dialogTimeout = 60000;
     }
     onVisibilityChange($event) {
         const isVisible = $event.target.visibilityState === 'visible';
