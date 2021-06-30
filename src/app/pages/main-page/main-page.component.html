@@ -1,10 +1,11 @@
 <div class="context-container">
     <form class="form" [formGroup]="testForm">
-        <tui-input [tuiTextfieldLabelOutside]="true" formControlName="searchInput" [tuiTextfieldCleaner]=true>
+        <tui-input [tuiTextfieldLabelOutside]="true" formControlName="searchInput" [tuiTextfieldCleaner]=true
+            tuiTextfieldSize="{{this.scale}}">
             Search
         </tui-input>
-        <tui-input-tag class="b-form" [tuiTextfieldLabelOutside]="true" formControlName="tagsInput"
-            (searchChange)="onSearchChange($event)">
+        <tui-input-tag class="input-tag" [tuiTextfieldLabelOutside]="true" formControlName="tagsInput"
+            (searchChange)="onSearchChange($event)" tuiTextfieldSize="{{this.tagsScale}}">
             Enter tags
             <tui-data-list-wrapper *tuiDataList [items]="items$ | async">
             </tui-data-list-wrapper>
@@ -23,7 +24,7 @@
                             <a href="{{item.ownerProfile}}" class="card-owner" target="_blank"
                                 [class.tui-skeleton]="(item.skeleton || item.image)"
                                 [class.tui-skeleton_rounded]="(item.skeleton || item.image)">
-                                <img [src]="item.ownerPhoto" alt="User Profile" class="card-owner-icon"
+                                <img loading="lazy" [src]="item.ownerPhoto" alt="User Profile" class="card-owner-icon"
                                     (load)="item.image = false">
                             </a>
                             <div class="card-text">
@@ -45,18 +46,22 @@
                         </div>
                         <div [class.tui-skeleton]="(item.skeleton || item.image)"
                             [class.tui-skeleton_rounded]="(item.skeleton || item.image)" class="ass">
-                            <img loading="lazy" alt="Post Image" [src]="item.url" width="{{item.width * 350}}"
-                                height="{{item.height * 250}}" class="card-img"
-                                [class.tui-skeleton]="(item.skeleton || item.image)"
+                            <img loading="lazy" alt="Post Image" [src]="item.url"
+                                width="{{item.width * this.imageWidth}}" height="{{item.height * this.imageHeight}}"
+                                class="card-img" [class.tui-skeleton]="(item.skeleton || item.image)"
                                 [class.tui-skeleton_rounded]="(item.skeleton || item.image)"
                                 (load)="item.skeleton=false">
 
                         </div>
                         <tui-island class="card-tags" *ngIf="item.tags[0]!=='' "
                             [style.background-color]="item.isFav?'var(--tui-base-05)':'white'">
-                            <tui-line-clamp [ngStyle]="{'max-height': '27px' }" [content]="tags" [lineHeight]="26"
-                                [linesLimit]="2" class="card-lineclamp">
+                            <tui-line-clamp [ngStyle]="{'max-height': '27px' }" [content]="tags" [lineHeight]="tagsLine"
+                                [linesLimit]="3" class="card-lineclamp">
                             </tui-line-clamp>
+                        </tui-island>
+                        <tui-island class="card-tags" *ngIf="(item.tags[0]==='')"
+                            [style.background-color]="item.isFav?'var(--tui-base-05)':'white'">
+                            <span class="card-notags">No Image Tags...</span>
                         </tui-island>
                         <ng-template #tags class="card-tags">
                             <div class="tag-container" [ngStyle]="{'font': 'var(--tui-font-text-m)'}">

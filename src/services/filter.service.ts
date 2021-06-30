@@ -13,9 +13,6 @@ export class FilterService {
 
     constructor() { }
 
-
-
-
     changeFilter(filter) {
         this.filter$.next(filter);
     }

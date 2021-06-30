@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 
 import { FormControl, FormGroup } from '@angular/forms';
 import { FilterService } from 'src/services/filter.service';
@@ -12,17 +12,24 @@ import { SidenavOutput } from '../../interfaces/side-nav.model';
 
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusTemplate } from '@tinkoff/ng-polymorpheus';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { Subscribable, Subscription } from 'rxjs';
+import { TUI_ARROW } from '@taiga-ui/kit';
 
 @Component({
     selector: 'app-side-nav',
     templateUrl: './side-nav.component.html',
-    styleUrls: ['./side-nav.component.scss']
+    styleUrls: ['./side-nav.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SideNavComponent implements OnInit {
 
     showFilter: boolean = true;
     showSorting: boolean = true;
     showAddFilter: boolean = true;
+    addSidebar: boolean = false;
+    showSidebar: boolean = false;
+    readonly arrow = TUI_ARROW;
 
     filterMass: Filter[] = FILTER;
     sortMass: Sorting[] = SORTING;
@@ -36,6 +43,10 @@ export class SideNavComponent implements OnInit {
         sorting: new FormControl(this.sortMass[0].data)
     });
 
+    private laptopQuerySubs: Subscription;
+    private mobileQuerySubs: Subscription;
+    public size: string = 'm';
+
     arg = new FormGroup({
         tags: new FormControl([]),
         name: new FormControl(),
@@ -45,7 +56,8 @@ export class SideNavComponent implements OnInit {
     constructor(
         private readonly filterService: FilterService,
         private changeDetector: ChangeDetectorRef,
-        @Inject(TuiDialogService) private readonly dialogService: TuiDialogService
+        @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
+        public breakpointObserver: BreakpointObserver
     ) { }
 
     ngOnInit() {
@@ -63,6 +75,26 @@ export class SideNavComponent implements OnInit {
                 this.showAddFilter = true;
             }
         })
+        this.laptopQuerySubs = this.breakpointObserver.observe(['(max-width: 1450px)']).subscribe((state: BreakpointState) => {
+            if (state.matches) {
+                this.size = 's';
+                this.changeDetector.detectChanges()
+            } else {
+                this.size = 'm';
+                this.changeDetector.detectChanges()
+            }
+        });
+
+        this.mobileQuerySubs = this.breakpointObserver.observe(['(max-width: 1050px)']).subscribe((state: BreakpointState) => {
+            if (state.matches) {
+                this.addSidebar = true;
+                this.changeDetector.detectChanges()
+            } else {
+                this.addSidebar = false;
+                this.changeDetector.detectChanges()
+            }
+        });
+
         this.filterService.tags$.subscribe((val) => {
             const filters = this.filterMass.filter((elem) => this.isContain(elem.tags, val))
             this.form.patchValue({ filters: filters }, { emitEvent: false });
@@ -100,5 +132,9 @@ export class SideNavComponent implements OnInit {
 
             }
         });
+    }
+
+    toggle(open: boolean) {
+        this.showSidebar = open;
     }
 }

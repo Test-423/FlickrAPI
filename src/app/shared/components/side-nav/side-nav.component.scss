@@ -10,6 +10,9 @@
         display: flex;
         flex-direction: column;
         background-color: var(--tui-base-03);
+        @media screen and (max-width: 1450px) {
+            width: 14rem;
+        }
         & > :nth-child(n + 2) {
             margin: 20px 0;
         }
@@ -45,6 +48,19 @@
         &-btn {
             margin-top: 10px;
         }
+        &-icon {
+            margin-right: 1rem;
+            @media screen and (max-width: 1450px) {
+                transform: scale(0.8);
+            }
+        }
+        &-container {
+            @media screen and (max-width: 1450px) {
+                align-items: center;
+                display: flex;
+                padding: 0.3rem 0.3rem 0.3rem 0.5rem;
+            }
+        }
     }
     .elem {
         &-icon {
@@ -58,6 +74,10 @@
             width: 100%;
         }
     }
+    .side-icon {
+        height: 2rem;
+        width: 100%;
+    }
     .accordion-container {
         display: flex;
         flex-direction: column;
@@ -68,7 +88,6 @@
     }
     .rounded {
         border-radius: var(--tui-radius-m);
-        height: 44px;
         margin-bottom: 4px;
     }
 }

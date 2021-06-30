@@ -1,11 +1,12 @@
 <div class="header">
     <div class="logo">
+        <tui-svg class="icon" src="tuiIconPicture"></tui-svg>
         <span class="logo-text">Image Finder</span>
     </div>
     <nav class="nav">
         <tui-tabs [(activeItemIndex)]="activeItemIndex" class="header-router" under>
             <button tuiTab *ngFor="let item of routingUrls; let last = last" tuiRipple="var(--tui-text-01)"
-                [routerLink]="item.url" [disabled]="last">
+                [routerLink]="item.url" [disabled]="last" class="tabs">
                 <tui-svg class="tui-space_right-2" [src]="item.icon"></tui-svg>
                 {{item.name}}
             </button>

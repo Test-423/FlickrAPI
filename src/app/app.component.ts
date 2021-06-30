@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     private userInactive: Subject<any> = new Subject();
     private userActivity: ReturnType<typeof setTimeout>;
     private dialogOpened: boolean = false;
-    private dialogTimeout: number = 60000;
+    private dialogTimeout: number = 10000;
 
 
     @HostListener("window:visibilitychange", ["$event"]) onVisibilityChange($event) {
@@ -28,9 +28,10 @@ export class AppComponent implements OnInit {
             clearTimeout(this.userActivity);
         }
     }
-    @HostListener('window:mousemove') refreshUserState() {
+
+    @HostListener('window:mousemove')
+    @HostListener('window:touchmove') refreshUserState() {
         if (this.dialogOpened === false) {
-            clearTimeout(this.userActivity);
             this.setCounter();
         }
     }
@@ -51,17 +52,15 @@ export class AppComponent implements OnInit {
         this.dialogSubs.unsubscribe();
     }
 
-
-
-
     setCounter(): void {
+        clearTimeout(this.userActivity);
         this.userActivity = setTimeout(() => this.userInactive.next(undefined), this.dialogTimeout);
     }
 
     showDialog() {
         this.dialogOpened = true;
         this.dialogSubs = this.dialogService
-            .open('Ваша сессия была закрыта', { label: 'Время сессии вышло!', size: 'l' })
+            .open('Your browser session on this page was terminated.', { label: 'Session time is over!', size: 'l' })
             .subscribe({
                 complete: () => {
                     this.dialogOpened = false;

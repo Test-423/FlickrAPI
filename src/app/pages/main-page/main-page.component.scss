@@ -15,6 +15,9 @@
     }
     .form {
         margin-bottom: 20px;
+        @media screen and (max-width: 1450px) {
+            margin-bottom: 10px;
+        }
     }
     .content {
         padding: 12px 20px;
@@ -27,6 +30,14 @@
         display: flex;
         flex-direction: column;
         padding: 20px;
+        @media screen and (max-width: 1450px) {
+            padding: 0.5rem;
+        }
+        @media screen and (max-width: 1050px) {
+            height: calc(100vh - 6.1rem);
+            width: 100%;
+            flex-grow: 1;
+        }
     }
     .container {
         width: 100%;
@@ -36,8 +47,8 @@
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-around;
-        @media screen and (max-width: 1500px) {
-            padding: 0.8rem;
+        @media screen and (max-width: 1450px) {
+            padding: 0 0.7rem;
         }
     }
     .wrapper {
@@ -52,58 +63,96 @@
     .card {
         display: inline-block;
         height: auto;
-        border-radius: 10px;
+        overflow: hidden;
+        border-radius: 1.5rem;
         border: 1px solid var(--tui-base-06);
         margin-bottom: 3rem;
         width: 352px;
+        @media screen and(max-width: 1450px) {
+            width: 252px;
+            margin-bottom: 2.5rem;
+        }
+        @media screen and (max-width: 1050px) {
+            width: 202px;
+            margin-bottom: 1.8rem;
+        }
         &-fav {
             //color: var(--tui-base-03);
             //border: 1px solid var(--tui-support-10);
             //background-color: var(--tui-text-01);
         }
         &-header {
-            min-height: 5.2rem;
-            height: auto;
             width: 100%;
-            padding: 1.1rem;
-            border-radius: 10px 10px 0 0;
+            padding: 1rem;
+            height: 5rem;
             display: flex;
             align-items: flex-start;
+            @media screen and (max-width: 1450px) {
+                height: 4rem;
+                padding: 1rem;
+            }
+            @media screen and (max-width: 1050px) {
+                padding: 0.6rem;
+                height: 3rem;
+            }
         }
         &-text {
-            margin-left: 1.1rem;
-            width: 12.3rem;
+            flex-grow: 1;
+            height: 100%;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            @media screen and(max-width: 1450px) {
+                width: 100%;
+                line-height: 1rem;
+            }
         }
         &-title {
-            min-height: 1.1rem;
-            max-height: 1.3rem;
             overflow: hidden;
             text-overflow: ellipsis;
             font-size: var(--font-size-m);
+            @media screen and(max-width: 1450px) {
+                font-size: 1.2rem;
+                height: 1rem;
+            }
+            @media screen and (max-width: 1050px) {
+                font-size: 1rem;
+            }
         }
         &-subtitle {
-            min-height: 1.3rem;
-            max-height: 2rem;
             overflow: hidden;
             text-overflow: ellipsis;
-            line-height: 1.1rem;
-            margin-top: 0.6rem;
+            line-height: 1rem;
+            text-decoration: underline;
+            @media screen and(max-width: 1450px) {
+                height: 1rem;
+                font-size: 0.8rem;
+            }
+            @media screen and(max-width: 1050px) {
+                font-size: 0.6rem;
+            }
         }
         &-btns {
-            height: 2.8rem;
+            height: 100%;
             display: flex;
             align-items: center;
             margin-left: auto;
+            // @media screen and (max-width: 1050px) {
+            //     transform: scale(0.6);
+            //     margin-left: 0.5rem;
+            // }
         }
-        &-share-btn {
-            margin-left: auto;
-            cursor: pointer;
-        }
+        &-share-btn,
         &-fav-btn {
-            margin-left: 1rem;
             cursor: pointer;
+            margin-left: 1rem;
+            @media screen and(max-width: 1450px) {
+                transform: scale(0.8);
+            }
+            @media screen and (max-width: 1050px) {
+                transform: scale(0.6);
+                margin-left: 0;
+            }
         }
         &-lineclamp {
             height: auto;
@@ -111,37 +160,58 @@
         }
         &-tags {
             height: auto;
-            max-height: 5.6rem;
-            padding: 0.9rem 0.6rem 0.9rem 1.1rem;
+            padding: 1rem 0.5rem 1rem 1rem;
             width: 100%;
             display: flex;
             overflow: hidden;
             text-overflow: ellipsis;
             box-sizing: border-box;
-            border-radius: 0 0 10px 10px;
+            border-radius: 0 0 1.5rem 1.5rem;
             //background-color: transparent;
+            // height: 60 - 80
+            @media screen and (max-width: 1450px) {
+                padding: 0.5rem 0.5rem 0.8rem 0.8rem;
+            }
+            @media screen and (max-width: 1050px) {
+                padding: 0.3rem 0.5rem 0.3rem 0.8rem;
+            }
             &::before {
                 border: none;
             }
         }
+        &-notags {
+            margin: 0 auto;
+        }
         &-owner {
             width: 3rem;
             height: 3rem;
-            border-radius: 0.4rem;
+            border-radius: 0.5rem;
+            margin-right: 1rem;
             display: flex;
             justify-content: center;
             align-items: center;
+            @media screen and (max-width: 1450px) {
+                width: 2rem;
+                height: 2rem;
+            }
+            @media screen and (max-width: 1050px) {
+                width: 1.8rem;
+                height: 1.8rem;
+                margin-right: 0.8rem;
+            }
             &-icon {
                 width: 3rem;
                 height: 3rem;
-                border-radius: 0.4rem;
+                border-radius: 0.5rem;
+                @media screen and (max-width: 1450px) {
+                    width: 2rem;
+                    height: 2rem;
+                }
+                @media screen and (max-width: 1050px) {
+                    width: 1.8rem;
+                    height: 1.8rem;
+                }
             }
-        }
-        &-img {
-            // width: 100%;
-            // min-width: 350px;
-            // max-width: 350px;
-            font-size: 14px;
         }
     }
     .ass {
@@ -152,6 +222,14 @@
         align-items: center;
         justify-content: center;
         overflow: hidden;
+        @media screen and (max-width: 1450px) {
+            width: 250px;
+            height: 200px;
+        }
+        @media screen and (max-width: 1050px) {
+            width: 200px;
+            height: 150px;
+        }
     }
     .spinner {
         height: 90%;
@@ -160,10 +238,10 @@
         align-items: center;
     }
     .tag {
-        background-color: var(--tui-autofill);
+        font-size: 5px;
         &-container {
             display: block;
-            font-size: 14px;
+            font-size: 10px;
         }
     }
     .loader {
@@ -189,9 +267,6 @@
         }
     }
 }
-.card-tag {
-    margin-right: 0.4rem;
-    margin-bottom: 0.3rem;
-    background-color: var(--tui-autofill);
-    height: 20px;
+.tag {
+    //background-color: var(--tui-autofill);
 }

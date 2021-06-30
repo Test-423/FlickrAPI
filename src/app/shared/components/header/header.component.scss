@@ -14,15 +14,27 @@
         z-index: 1000;
         position: relative;
         background-color: var(--tui-base-02);
-
         font-size: var(--font-size-l);
         color: var(--tui-text-01);
+        @media screen and (max-width: 1450px) {
+            height: 4.4rem;
+        }
+        @media screen and (max-width: 1050px) {
+            height: 3.6rem;
+        }
     }
     .logo {
         width: 20rem;
         padding-left: 2.8rem;
         display: flex;
         align-items: center;
+        @media screen and (max-width: 1450px) {
+            width: 15rem;
+            padding-left: 1.5rem;
+        }
+        @media screen and (max-width: 1050px) {
+            font-size: 1.2rem;
+        }
     }
     .logo-text {
         width: 9rem;
@@ -30,6 +42,15 @@
         font-size: var(--font-size-m);
         text-decoration: underline;
         text-decoration-color: var(--tui-primary);
+        @media screen and (max-width: 600px) {
+            font-size: 1rem;
+            width: auto;
+        }
+    }
+    .tabs {
+        @media screen and (max-width: 1050px) {
+            font-size: 0px;
+        }
     }
     .logo-icon {
         margin: 0rem;

@@ -1,16 +1,30 @@
-<nav class="side-nav">
-    <tui-accordion-item [(open)]="showFilter" class="accordion">
+<nav class="side-nav" *ngIf="!addSidebar">
+    <div *ngTemplateOutlet="filters"></div>
+</nav>
+
+<button *ngIf="addSidebar" tuiButton type="button" (click)="toggle(true)" (tuiActiveZoneChange)="toggle($event)"
+    icon="tuiIconSettings" class="side-icon">
+    Filters
+    <div *tuiSidebar="showSidebar; direction: 'left'">
+        <div *ngTemplateOutlet="filters"></div>
+    </div>
+</button>
+
+
+<ng-template #filters>
+    <tui-accordion-item [(open)]="showFilter" class="accordion" size="{{this.size}}">
         Filter
         <ng-template tuiAccordionItemContent class="ras">
             <div class="accordion-container">
                 <form [formGroup]="form" orientation="vertical" class="filter-form">
-                    <tui-filter formControlName="filters" [content]="filter" [items]="filterMass" class="filter">
+                    <tui-filter formControlName="filters" [content]="filter" [items]="filterMass" class="filter"
+                        size="{{this.size}}">
                     </tui-filter>
                 </form>
                 <div>
                     <ng-template #filter let-item>
                         <div class="filter-container">
-                            <tui-svg class="tui-space_right-4" [src]="item.icon"></tui-svg>
+                            <tui-svg class="tui-space_right-4" [src]="item.icon" class="filter-icon"></tui-svg>
                             {{item.name}}
                         </div>
                     </ng-template>
@@ -41,17 +55,17 @@
             </div>
         </ng-template>
     </tui-accordion-item>
-    <tui-accordion-item [(open)]="showSorting">
+    <tui-accordion-item [(open)]="showSorting" size={{this.size}}>
         Sort
         <ng-template tuiAccordionItemContent>
             <form [formGroup]="form" orientation="vertical">
                 <div tuiGroup class="group sort" [collapsed]="true" orientation="vertical">
-                    <tui-radio-block contentAlign="left" formControlName="sorting" size="m"
-                        *ngFor="let item of sortMass" item={{item.data}} class="rounded">
+                    <tui-radio-block contentAlign="left" formControlName="sorting" *ngFor="let item of sortMass"
+                        size={{this.size}} item={{item.data}} class="rounded">
                         {{item.name}}
                     </tui-radio-block>
                 </div>
             </form>
         </ng-template>
     </tui-accordion-item>
-</nav>
+</ng-template>

@@ -34,6 +34,12 @@ const tagsData: readonly string[] = [
 
 export class MainPageComponent implements OnInit {
 
+    public imageWidth: number = 350;
+    public imageHeight: number = 250;
+    public tagsLine: number = 27;
+    public scale: string = 'l';
+    public tagsScale: string = 'l';
+
     public testForm = new FormGroup({
         tagsInput: new FormControl([]),
         searchInput: new FormControl(),
@@ -49,7 +55,8 @@ export class MainPageComponent implements OnInit {
     private sortingSubs: Subscription;
     private formSubs: Subscription;
     private imagesSubs: Subscription;
-    private querySubs: Subscription;
+    private laptopQuerySubs: Subscription;
+    private mobileQuerySubs: Subscription;
 
     private tags$ = new Subject<string>();
 
@@ -104,16 +111,44 @@ export class MainPageComponent implements OnInit {
             this.onSearch.emit(val);
             this.filterService.sendTags(val.tagsInput);
         });
-        this.breakpointObserver.observe(['(max-width: 400px)']).subscribe((state: BreakpointState) => {
+
+        this.mobileQuerySubs = this.breakpointObserver.observe(['(max-width: 1050px)']).subscribe((state: BreakpointState) => {
             if (state.matches) {
-                console.log(true)
+                this.imageHeight = 150;
+                this.imageWidth = 200;
+                this.scale = 's';
+                this.changeDetector.detectChanges()
             } else {
-                console.log(false)
+                this.imageHeight = 200;
+                this.imageWidth = 300;
+                this.scale = 'm';
+                this.changeDetector.detectChanges()
             }
         });
+
+        this.laptopQuerySubs = this.breakpointObserver.observe(['(max-width: 1450px)']).subscribe((state: BreakpointState) => {
+            if (state.matches) {
+                this.imageHeight = 200;
+                this.imageWidth = 300;
+                this.scale = 'm';
+                this.tagsScale = 'm'
+                this.changeDetector.detectChanges()
+            } else {
+                this.imageHeight = 250;
+                this.imageWidth = 350;
+                this.scale = 'l';
+                this.tagsScale = 'l'
+                this.changeDetector.detectChanges()
+            }
+        });
+
+
         this.testForm.patchValue({ searchInput: 'car' });
 
-
+        this.imageHeight = 250;
+        this.imageWidth = 350;
+        this.scale = 'm';
+        this.tagsScale = 'm'
     }
 
     ngOnDestroy(): void {
@@ -121,6 +156,8 @@ export class MainPageComponent implements OnInit {
         this.formSubs.unsubscribe();
         this.sortingSubs.unsubscribe();
         this.imagesSubs.unsubscribe();
+        this.laptopQuerySubs.unsubscribe();
+        this.mobileQuerySubs.unsubscribe();
     }
 
     favClick(item: Images) {

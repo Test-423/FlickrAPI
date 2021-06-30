@@ -135,7 +135,7 @@ import {
 import { PolymorpheusModule } from '@tinkoff/ng-polymorpheus';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { TuiActiveZoneModule } from '@taiga-ui/cdk';
 @NgModule({
     exports: [
         BrowserModule,
@@ -260,6 +260,7 @@ import { BrowserModule } from '@angular/platform-browser';
         TuiFormatPhonePipeModule,
         TuiMapperPipeModule,
         TuiTableModule,
+        TuiActiveZoneModule
     ]
 })
 

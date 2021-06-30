@@ -22,7 +22,6 @@ export class FavImagesService {
     setItem(item) {
         this.images = JSON.parse(localStorage.getItem('fav-images'));
         if (!this.images.find(elem => elem.url === item.url)) {
-            console.log(item)
             let img = Object.assign({}, item)
             item.img = true;
             item.img = true;
